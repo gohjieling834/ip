@@ -32,6 +32,6 @@ public class Task {
     }
 
     public void unmarkAsDone() {
-        
+        isDone = false;
     }
 }
