@@ -5,22 +5,24 @@ public class Berry {
         String chatbotName = "Berry";
         String userCommand;
         Task[] tasks = new Task[100];   //array of Task objects
-        int numberOftasks = 0;
+        int numberOfTasks = 0;
         Scanner in = new Scanner(System.in);
-        System.out.println("‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧\nHello! I'm " + chatbotName + "\nWhat can I do for you?\n‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧\n");
+        System.out.println("‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧\nHello! I'm " + chatbotName
+                + "\nWhat can I do for you?\n‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧\n");
         userCommand = in.nextLine();  //get command from user
         while (!userCommand.equals("bye")) {
             if (userCommand.equals("list")) {
-                list(tasks, numberOftasks);
+                printList(tasks, numberOfTasks);
             } else if (userCommand.contains("mark")) {
                 toggleTaskStatus(userCommand, tasks);
             } else {
-                addTask(userCommand, tasks, numberOftasks);
-                numberOftasks++;
+                addTask(userCommand, tasks, numberOfTasks);
+                numberOfTasks++;
             }
             userCommand = in.nextLine();
         }
-        System.out.println("\n‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧\nBye. Hope to see you again soon!\n‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧");
+        System.out.println("\n‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧\nBye. Hope to see you again soon!"
+                + "\n‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧");
     }
 
     public static void addTask(String command, Task[] tasks, int numberOftasks) {
@@ -28,7 +30,7 @@ public class Berry {
         System.out.println("\n‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧\nadded: " + command + "\n‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧\n");
     }
 
-    public static void list(Task[] tasks, int numberOftasks) {
+    public static void printList(Task[] tasks, int numberOftasks) {
         System.out.println("\n‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧");
         for (int i = 0; i < numberOftasks; i++) {
             System.out.println(i + 1 + ".[" + tasks[i].getStatusIcon() + "] " + tasks[i].getDescription());
