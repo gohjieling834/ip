@@ -31,7 +31,11 @@ public class Task {
         isDone = true;
     }
 
-    public void unmarkAsDone() {
+    public void markAsUndone() {
         isDone = false;
+    }
+
+    public String toString() {
+        return "[" + getStatusIcon() + "] " + description;
     }
 }
