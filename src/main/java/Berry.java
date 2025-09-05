@@ -3,17 +3,17 @@ import java.util.Scanner;
 public class Berry {
     public static final String DIVIDER = "‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧";
     public static final String CHATBOT_NAME = "Berry";
-    public static final int TASK_SIZE = 100;
+    public static final int TASK_CAPACITY = 100;
+    public static final Scanner IN = new Scanner(System.in);
 
     public static void main(String[] args) {
         String userInput;
-        Task[] tasks = new Task[TASK_SIZE];   //array of Task objects
+        Task[] tasks = new Task[TASK_CAPACITY];   //array of Task objects
         int taskCount = 0;
-        Scanner in = new Scanner(System.in);
 
         printHelloMessage();
         while (true) {
-            userInput = getUserInput(in);  //get command from user
+            userInput = getUserInput(IN);  //get command from user
             taskCount = executeCommand(userInput, tasks, taskCount);
         }
     }
@@ -59,6 +59,12 @@ public class Berry {
         return userCommand;
     }
 
+    public static String[] extractDetails(String userInput) {
+        int dividerPosition = userInput.indexOf(" ");
+        String task = userInput.substring(dividerPosition + 1);
+        return task.split("/");
+    }
+
     public static int executeCommand(String userInput, Task[] tasks, int taskCount) {
         String userCommand = extractCommand(userInput);
         switch (userCommand) {
@@ -91,26 +97,25 @@ public class Berry {
         return taskCount;
     }
 
-    public static void addTodo(String command, Task[] tasks, int taskCount) {
-        String description = command.substring(5).trim();
+    public static void addTodo(String userInput, Task[] tasks, int taskCount) {
+        String description = userInput.substring(5).trim();
         tasks[taskCount - 1] = new Todo(description);
         printAddTaskMessage(tasks[taskCount - 1], taskCount);
     }
 
-    public static void addDeadline(String command, Task[] tasks, int taskCount) {
-        int indexOfBy = command.indexOf("by");
-        String description = command.substring(9, indexOfBy - 1).trim();
-        String by = command.substring(indexOfBy + 3);
+    public static void addDeadline(String userInput, Task[] tasks, int taskCount) {
+        String[] taskDetails = extractDetails(userInput);
+        String description = taskDetails[0].trim();
+        String by = taskDetails[1].substring(3);    //begin index = 3 because "by " is 3 characters
         tasks[taskCount - 1] = new Deadline(description, by);
         printAddTaskMessage(tasks[taskCount - 1], taskCount);
     }
 
-    public static void addEvent(String command, Task[] tasks, int taskCount) {
-        int indexOfFrom = command.indexOf("from");
-        int indexOfTo = command.indexOf("to");
-        String description = command.substring(6, indexOfFrom - 1).trim();
-        String from = command.substring(indexOfFrom + 5, indexOfTo - 1).trim();
-        String to = command.substring(indexOfTo + 3);
+    public static void addEvent(String userInput, Task[] tasks, int taskCount) {
+        String[] taskDetails = extractDetails(userInput);
+        String description = taskDetails[0].trim();
+        String from = taskDetails[1].substring(5).trim();   //begin index = 5 because "from " is 5 characters
+        String to = taskDetails[2].substring(3);    //begin index = 3 because "to " is 3 characters
         tasks[taskCount - 1] = new Event(description, from, to);
         printAddTaskMessage(tasks[taskCount - 1], taskCount);
     }
@@ -123,20 +128,20 @@ public class Berry {
         System.out.println(DIVIDER + "\n");
     }
 
-    public static void toggleTaskStatus(String command, Task[] tasks) {
-        int dividerPosition = command.indexOf(" ");
+    public static void toggleTaskStatus(String userInput, Task[] tasks) {
+        int dividerPosition = userInput.indexOf(" ");
 
         //task number to identify which task to mark/unmark
-        int taskNumber = Integer.parseInt(command.substring(dividerPosition).trim()) - 1;
+        int taskNumber = Integer.parseInt(userInput.substring(dividerPosition).trim()) - 1;
         System.out.println("\n" + DIVIDER);
-        if (command.contains("un")) {
+        if (userInput.contains("un")) {
             tasks[taskNumber].markAsUndone();
-            System.out.println("Okay, I've marked this task as not done yet:\n[ ] "
-                    + tasks[taskNumber].getDescription() + "\n" + DIVIDER + "\n");
+            System.out.println("Okay, I've marked this task as not done yet:\n  "
+                    + tasks[taskNumber] + "\n" + DIVIDER + "\n");
         } else {
             tasks[taskNumber].markAsDone();
-            System.out.println("Nice! I've marked this task as done:\n[X] "
-                    + tasks[taskNumber].getDescription() + "\n" + DIVIDER + "\n");
+            System.out.println("Nice! I've marked this task as done:\n  "
+                    + tasks[taskNumber] + "\n" + DIVIDER + "\n");
         }
     }
 }
