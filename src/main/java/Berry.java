@@ -9,10 +9,11 @@ public class Berry {
         String userInput;
         Task[] tasks = new Task[TASK_SIZE];   //array of Task objects
         int taskCount = 0;
+        Scanner in = new Scanner(System.in);
 
         printHelloMessage();
         while (true) {
-            userInput = getUserInput();  //get command from user
+            userInput = getUserInput(in);  //get command from user
             taskCount = executeCommand(userInput, tasks, taskCount);
         }
     }
@@ -36,8 +37,7 @@ public class Berry {
                 + "\nNow you have " + taskCount + " tasks in the list.\n" + DIVIDER + "\n");
     }
 
-    public static String getUserInput() {
-        Scanner in = new Scanner(System.in);
+    public static String getUserInput(Scanner in) {
         return in.nextLine();
     }
 

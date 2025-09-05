@@ -1,0 +1,12 @@
+todo read book
+deadline finish CS2113 Coursemology task by Mon 5pm
+event attend expo from Mon 2pm to 4pm
+mark 1
+list
+todo cook dinner
+deadline Submit homework by Tue 6pm
+mark 3
+list
+unmark 1
+list
+bye
