@@ -1,3 +1,10 @@
+package berry;
+
+import berry.task.Deadline;
+import berry.task.Event;
+import berry.task.Task;
+import berry.task.Todo;
+
 import java.util.Scanner;
 
 public class Berry {
@@ -13,7 +20,7 @@ public class Berry {
 
         printHelloMessage();
         while (true) {
-            userInput = getUserInput(IN);  //get command from user
+            userInput = getUserInput(IN);   //get command from user
             taskCount = executeCommand(userInput, tasks, taskCount);
         }
     }
@@ -34,7 +41,7 @@ public class Berry {
 
     public static void printAddTaskMessage(Task task, int taskCount) {
         System.out.println("\n" + DIVIDER + "\nGot it. I've added this task:\n  " + task
-                + "\nNow you have " + taskCount + " tasks in the list.\n" + DIVIDER + "\n");
+                + "\nNow you have " + (taskCount + 1) + " tasks in the list.\n" + DIVIDER + "\n");
     }
 
     public static String getUserInput(Scanner in) {
@@ -75,16 +82,16 @@ public class Berry {
                 printList(tasks, taskCount);
                 break;
             case "todo":
-                taskCount++;
                 addTodo(userInput, tasks, taskCount);
+                taskCount++;
                 break;
             case "deadline":
-                taskCount++;
                 addDeadline(userInput, tasks, taskCount);
+                taskCount++;
                 break;
             case "event":
-                taskCount++;
                 addEvent(userInput, tasks, taskCount);
+                taskCount++;
                 break;
             case "mark":
                 toggleTaskStatus(userInput, tasks);
@@ -107,8 +114,8 @@ public class Berry {
             throw new BerryException("Your description of todo cannot be empty!");
         }
         String description = userInput.substring(5).trim();
-        tasks[taskCount - 1] = new Todo(description);
-        printAddTaskMessage(tasks[taskCount - 1], taskCount);
+        tasks[taskCount] = new Todo(description);
+        printAddTaskMessage(tasks[taskCount], taskCount);
     }
 
     public static void addDeadline(String userInput, Task[] tasks, int taskCount) {
@@ -116,10 +123,11 @@ public class Berry {
         if (taskDetails.length < 2) {
             throw new ArrayIndexOutOfBoundsException("Please enter both task description and by when. Thank you :)");
         }
+        int startIndexOfBy = taskDetails[1].indexOf("by") + 2;  // + 2 because the substring start index should begin after by
         String description = taskDetails[0].trim();
-        String by = taskDetails[1].substring(3);    //begin index = 3 because "by " is 3 characters
-        tasks[taskCount - 1] = new Deadline(description, by);
-        printAddTaskMessage(tasks[taskCount - 1], taskCount);
+        String by = taskDetails[1].substring(startIndexOfBy).trim();
+        tasks[taskCount] = new Deadline(description, by);
+        printAddTaskMessage(tasks[taskCount], taskCount);
     }
 
     public static void addEvent(String userInput, Task[] tasks, int taskCount) {
@@ -127,11 +135,13 @@ public class Berry {
         if (taskDetails.length < 3) {
             throw new ArrayIndexOutOfBoundsException("Please enter all the event detail (description, from, to). Thank you :)");
         }
+        int startIndexOfFrom = taskDetails[1].indexOf("from") + 4;  // + 4 because the substring start index should begin after from
+        int startIndexOfTo = taskDetails[2].indexOf("to") + 2;  // + 2 because the substring start index should begin after to
         String description = taskDetails[0].trim();
-        String from = taskDetails[1].substring(5).trim();   //begin index = 5 because "from " is 5 characters
-        String to = taskDetails[2].substring(3);    //begin index = 3 because "to " is 3 characters
-        tasks[taskCount - 1] = new Event(description, from, to);
-        printAddTaskMessage(tasks[taskCount - 1], taskCount);
+        String from = taskDetails[1].substring(startIndexOfFrom).trim();
+        String to = taskDetails[2].substring(startIndexOfTo).trim();
+        tasks[taskCount] = new Event(description, from, to);
+        printAddTaskMessage(tasks[taskCount], taskCount);
     }
 
     public static void printList(Task[] tasks, int taskCount) {
