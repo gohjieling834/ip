@@ -1,3 +1,10 @@
+package berry;
+
+import berry.task.Deadline;
+import berry.task.Event;
+import berry.task.Task;
+import berry.task.Todo;
+
 import java.util.Scanner;
 
 public class Berry {
