@@ -16,12 +16,11 @@ public class Berry {
     public static void main(String[] args) {
         String userInput;
         ArrayList<Task> tasks = new ArrayList<>();
-        int taskCount = 0;
 
         printHelloMessage();
         while (true) {
             userInput = getUserInput(IN);
-            taskCount = executeCommand(userInput, tasks, taskCount);
+            executeCommand(userInput, tasks);
         }
     }
 
@@ -74,24 +73,21 @@ public class Berry {
         return task.split("/");
     }
 
-    public static int executeCommand(String userInput, ArrayList<Task> tasks, int taskCount) {
+    public static void executeCommand(String userInput, ArrayList<Task> tasks) {
         try {
             String userCommand = extractCommand(userInput);
             switch (userCommand) {
             case "list":
-                printList(tasks, taskCount);
+                printList(tasks);
                 break;
             case "todo":
-                addTodo(userInput, tasks, taskCount);
-                taskCount++;
+                addTodo(userInput, tasks);
                 break;
             case "deadline":
-                addDeadline(userInput, tasks, taskCount);
-                taskCount++;
+                addDeadline(userInput, tasks);
                 break;
             case "event":
-                addEvent(userInput, tasks, taskCount);
-                taskCount++;
+                addEvent(userInput, tasks);
                 break;
             case "mark":
                 toggleTaskStatus(userInput, tasks);
@@ -106,10 +102,9 @@ public class Berry {
         } catch (ArrayIndexOutOfBoundsException e) {
             printErrorMessage(e.getMessage());
         }
-        return taskCount;
     }
 
-    public static void addTodo(String userInput, ArrayList<Task> tasks, int taskCount) {
+    public static void addTodo(String userInput, ArrayList<Task> tasks) {
         if (userInput.trim().length() < 5) {
             throw new BerryException("Your description of todo cannot be empty!");
         }
@@ -118,7 +113,7 @@ public class Berry {
         printAddTaskMessage(tasks);
     }
 
-    public static void addDeadline(String userInput, ArrayList<Task> tasks, int taskCount) {
+    public static void addDeadline(String userInput, ArrayList<Task> tasks) {
         String[] taskDetails = extractDetails(userInput);
         if (taskDetails.length < 2) {
             throw new ArrayIndexOutOfBoundsException("Please enter both task description and by when. Thank you :)");
@@ -130,7 +125,7 @@ public class Berry {
         printAddTaskMessage(tasks);
     }
 
-    public static void addEvent(String userInput, ArrayList<Task> tasks, int taskCount) {
+    public static void addEvent(String userInput, ArrayList<Task> tasks) {
         String[] taskDetails = extractDetails(userInput);
         if (taskDetails.length < 3) {
             throw new ArrayIndexOutOfBoundsException("Please enter all the event detail (description, from, to). Thank you :)");
@@ -144,12 +139,12 @@ public class Berry {
         printAddTaskMessage(tasks);
     }
 
-    public static void printList(ArrayList<Task> tasks, int taskCount) {
-        if (taskCount == 0) {
+    public static void printList(ArrayList<Task> tasks) {
+        if (tasks.isEmpty()) {
             throw new BerryException("There's no tasks in the list. Would you like to start adding tasks?");
         }
         System.out.println("\n" + DIVIDER);
-        for (int i = 0; i < taskCount; i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + "." + tasks.get(i));
         }
         System.out.println(DIVIDER + "\n");
