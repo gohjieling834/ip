@@ -16,7 +16,6 @@ public class Berry {
     public static void main(String[] args) {
         String userInput;
         ArrayList<Task> tasks = new ArrayList<>();
-
         printHelloMessage();
         while (true) {
             userInput = getUserInput(IN);
@@ -39,7 +38,7 @@ public class Berry {
     }
 
     public static void printAddTaskMessage(ArrayList<Task> tasks) {
-        System.out.println("\n" + DIVIDER + "\nGot it. I've added this task:\n  " + tasks.get(tasks.size()-1)
+        System.out.println("\n" + DIVIDER + "\nGot it. I've added this task:\n  " + tasks.get(tasks.size() - 1)
                 + "\nNow you have " + tasks.size() + " tasks in the list.\n" + DIVIDER + "\n");
     }
 
@@ -59,6 +58,8 @@ public class Berry {
             userCommand = "event";
         } else if (userInput.contains("mark")) {
             userCommand = "mark";
+        } else if (userInput.contains("delete")) {
+            userCommand = "delete";
         } else if (userInput.contains("bye")) {
             userCommand = "bye";
         } else {
@@ -91,6 +92,9 @@ public class Berry {
                 break;
             case "mark":
                 toggleTaskStatus(userInput, tasks);
+                break;
+            case "delete":
+                deleteTask(userInput, tasks);
                 break;
             case "bye":
                 printByeMessage();
@@ -165,8 +169,23 @@ public class Berry {
                         + tasks.get(taskNumber) + "\n" + DIVIDER + "\n");
             }
         } catch (NumberFormatException e) {
+            printErrorMessage("Sorry, I don't know which task to mark/unmark. Please enter the task number, thank you! :)");
+        } catch (IndexOutOfBoundsException e) {
+            printErrorMessage("This task number does not exist! :|");
+        }
+    }
+
+    public static void deleteTask(String userInput, ArrayList<Task> tasks) {
+        int dividerPosition = userInput.indexOf(" ");
+
+        try {
+            int taskNumber = Integer.parseInt(userInput.substring(dividerPosition).trim()) - 1;
+            System.out.println("\n" + DIVIDER + "\n" + "Okay, I've removed this task:\n  "
+                    + tasks.remove(taskNumber) + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n"
+                    + DIVIDER + "\n");
+        } catch (NumberFormatException e) {
             printErrorMessage("Sorry, I don't know which task to delete. Please enter the task number, thank you! :)");
-        } catch (NullPointerException e) {
+        } catch (IndexOutOfBoundsException e) {
             printErrorMessage("This task number does not exist! :|");
         }
     }
