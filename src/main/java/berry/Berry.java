@@ -179,7 +179,7 @@ public class Berry {
                 toggleTaskStatus(userInput, userCommand, tasks);
                 break;
             case "delete":
-                deleteTask(userInput, tasks);
+                deleteTask(userInput, userCommand, tasks);
                 break;
             case "bye":
                 printByeMessage();
@@ -266,7 +266,7 @@ public class Berry {
         }
     }
 
-    public static void deleteTask(String userInput, ArrayList<Task> tasks) {
+    public static void deleteTask(String userInput, String userCommand, ArrayList<Task> tasks) {
         int dividerPosition = userInput.indexOf(" ");
 
         try {
@@ -274,10 +274,13 @@ public class Berry {
             System.out.println("\n" + DIVIDER + "\n" + "Okay, I've removed this task:\n  "
                     + tasks.remove(taskNumber) + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n"
                     + DIVIDER + "\n");
+            updateFile(taskNumber, userCommand, tasks);
         } catch (NumberFormatException e) {
             printErrorMessage("Sorry, I don't know which task to delete. Please enter the task number, thank you! :)");
         } catch (IndexOutOfBoundsException e) {
             printErrorMessage("This task number does not exist! :|");
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
 }
