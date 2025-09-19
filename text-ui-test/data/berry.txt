@@ -1,0 +1,5 @@
+T |   | read book
+D |   | finish CS2113 Coursemology task | Mon 5pm
+E | X | attend expo | Mon 2pm | 4pm
+T |   | cook dinner
+D |   | Submit homework | Tue 6pm

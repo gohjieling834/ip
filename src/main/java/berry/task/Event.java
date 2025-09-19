@@ -30,4 +30,9 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (from: " + from + " to: " + to + ")";
     }
+
+    @Override
+    public String fileFormat() {
+        return "E | " + getStatusIcon() + " | " + getDescription() + " | " + getFrom() + " | " + getTo();
+    }
 }
