@@ -1,4 +1,3 @@
-T | X | test code
-T |   | read
-E | X | eat dinner with friends | 5pm | 6pm
+D |   | presentation 1 | thursday
+E |   | eat dinner | 5pm | 6pm
 T |   | read
