@@ -19,4 +19,10 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
-    }}
+    }
+
+    @Override
+    public String fileFormat() {
+        return "D | " + getStatusIcon() + " | " + getDescription() + " | " + getBy();
+    }
+}

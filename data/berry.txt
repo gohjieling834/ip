@@ -1,0 +1,4 @@
+T | X | fix bug
+T | X | test code
+T |   | read
+E | X | eat dinner with friends | 5pm | 6pm
