@@ -1,5 +1,11 @@
 package berry;
 
+import berry.command.AddDeadlineCommand;
+import berry.command.AddEventCommand;
+import berry.command.AddTodoCommand;
+import berry.command.DeleteCommand;
+import berry.command.ListCommand;
+import berry.command.MarkCommand;
 import berry.task.Deadline;
 import berry.task.Event;
 import berry.task.Task;
@@ -85,7 +91,7 @@ public class Berry {
         }
     }
 
-    private static void updateFile(int taskIndex, String userCommand, ArrayList<Task> tasks) throws IOException {
+    public static void updateFile(int taskIndex, String userCommand, ArrayList<Task> tasks) throws IOException {
         File tempFile = new File(TEMPFILEPATH);
         checkFileExists(tempFile);
         FileWriter tempFileWriter = new FileWriter(tempFile);
@@ -110,7 +116,7 @@ public class Berry {
         tempFile.renameTo(DATAFILE);
     }
 
-    private static void appendToFile(ArrayList<Task> tasks) throws IOException {
+    public static void appendToFile(ArrayList<Task> tasks) throws IOException {
         FileWriter fw = new FileWriter(FILEPATH, true);
         Task newestTask = tasks.get(tasks.size() - 1);
         fw.write(newestTask.fileFormat() + System.lineSeparator());
@@ -129,11 +135,6 @@ public class Berry {
 
     public static void printErrorMessage(String errorMessage) {
         System.out.println("\n" + DIVIDER + "\n" + errorMessage + "\n" + DIVIDER + "\n");
-    }
-
-    public static void printAddTaskMessage(ArrayList<Task> tasks) {
-        System.out.println("\n" + DIVIDER + "\nGot it. I've added this task:\n  " + tasks.get(tasks.size() - 1)
-                + "\nNow you have " + tasks.size() + " tasks in the list.\n" + DIVIDER + "\n");
     }
 
     public static String getUserInput(Scanner in) {
@@ -173,22 +174,29 @@ public class Berry {
             String userCommand = extractCommand(userInput);
             switch (userCommand) {
             case "list":
-                printList(tasks);
+                ListCommand list = new ListCommand(tasks);
+                list.print();
+//                printList(tasks);
                 break;
             case "todo":
-                addTodo(userInput, tasks);
+                AddTodoCommand todo = new AddTodoCommand(tasks, userInput);
+                todo.add();
                 break;
             case "deadline":
-                addDeadline(userInput, tasks);
+                AddDeadlineCommand deadline = new AddDeadlineCommand(tasks, userInput);
+                deadline.add();
                 break;
             case "event":
-                addEvent(userInput, tasks);
+                AddEventCommand event = new AddEventCommand(tasks, userInput);
+                event.add();
                 break;
             case "mark":
-                toggleTaskStatus(userInput, userCommand, tasks);
+                MarkCommand mark = new MarkCommand(tasks, userCommand, userInput);
+                mark.toggleTaskStatus();
                 break;
             case "delete":
-                deleteTask(userInput, userCommand, tasks);
+                DeleteCommand delete = new DeleteCommand(tasks, userCommand, userInput);
+                delete.deleteTask();
                 break;
             case "bye":
                 printByeMessage();
@@ -196,97 +204,6 @@ public class Berry {
                 // Fallthrough
             }
         } catch (BerryException | ArrayIndexOutOfBoundsException | IOException e) {
-            printErrorMessage(e.getMessage());
-        }
-    }
-
-    public static void addTodo(String userInput, ArrayList<Task> tasks) throws IOException {
-        if (userInput.trim().length() < 5) {
-            throw new BerryException("Your description of todo cannot be empty!");
-        }
-        String description = userInput.substring(5).trim();
-        tasks.add(new Todo(description));
-        appendToFile(tasks);
-        printAddTaskMessage(tasks);
-    }
-
-    public static void addDeadline(String userInput, ArrayList<Task> tasks) throws IOException {
-        String[] taskDetails = extractDetails(userInput);
-        if (taskDetails.length < 2) {
-            throw new ArrayIndexOutOfBoundsException("Please enter both task description and by when. Thank you :)");
-        }
-        int startIndexOfBy = taskDetails[1].indexOf("by") + 2;  // + 2 because the substring start index should begin after by
-        String description = taskDetails[0].trim();
-        String by = taskDetails[1].substring(startIndexOfBy).trim();
-        tasks.add(new Deadline(description, by));
-        printAddTaskMessage(tasks);
-        appendToFile(tasks);
-    }
-
-    public static void addEvent(String userInput, ArrayList<Task> tasks) throws IOException {
-        String[] taskDetails = extractDetails(userInput);
-        if (taskDetails.length < 3) {
-            throw new ArrayIndexOutOfBoundsException("Please enter all the event detail (description, from, to). Thank you :)");
-        }
-        int startIndexOfFrom = taskDetails[1].indexOf("from") + 4;  // + 4 because the substring start index should begin after from
-        int startIndexOfTo = taskDetails[2].indexOf("to") + 2;  // + 2 because the substring start index should begin after to
-        String description = taskDetails[0].trim();
-        String from = taskDetails[1].substring(startIndexOfFrom).trim();
-        String to = taskDetails[2].substring(startIndexOfTo).trim();
-        tasks.add(new Event(description, from, to));
-        appendToFile(tasks);
-        printAddTaskMessage(tasks);
-    }
-
-    public static void printList(ArrayList<Task> tasks) {
-        if (tasks.isEmpty()) {
-            throw new BerryException("There's no tasks in the list. Would you like to start adding tasks?");
-        }
-        System.out.println("\n" + DIVIDER);
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + "." + tasks.get(i));
-        }
-        System.out.println(DIVIDER + "\n");
-    }
-
-    public static void toggleTaskStatus(String userInput, String userCommand, ArrayList<Task> tasks) {
-        int dividerPosition = userInput.indexOf(" ");
-
-        try {
-            int taskNumber = Integer.parseInt(userInput.substring(dividerPosition).trim()) - 1;
-            if (userInput.contains("un")) {
-                tasks.get(taskNumber).markAsUndone();
-                System.out.println("\n" + DIVIDER + "\n" + "Okay, I've marked this task as not done yet:\n  "
-                        + tasks.get(taskNumber) + "\n" + DIVIDER + "\n");
-            } else {
-                tasks.get(taskNumber).markAsDone();
-                System.out.println("\n" + DIVIDER + "\n" + "Nice! I've marked this task as done:\n  "
-                        + tasks.get(taskNumber) + "\n" + DIVIDER + "\n");
-            }
-            updateFile(taskNumber, userCommand, tasks);
-        } catch (NumberFormatException e) {
-            printErrorMessage("Sorry, I don't know which task to mark/unmark. Please enter the task number, thank you! :)");
-        } catch (IndexOutOfBoundsException e) {
-            printErrorMessage("This task number does not exist! :|");
-        } catch (IOException e) {
-            printErrorMessage(e.getMessage());
-        }
-    }
-
-    public static void deleteTask(String userInput, String userCommand, ArrayList<Task> tasks) {
-        int dividerPosition = userInput.indexOf(" ");
-
-        try {
-            int taskNumber = Integer.parseInt(userInput.substring(dividerPosition).trim()) - 1;
-            System.out.println("\n" + DIVIDER + "\n" + "Okay, I've removed this task:\n  "
-                    + tasks.remove(taskNumber) + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n"
-                    + DIVIDER + "\n");
-            updateFile(taskNumber, userCommand, tasks);
-        } catch (NumberFormatException e) {
-            printErrorMessage("Sorry, I don't know which task to delete. Please enter the task number, thank you! :)");
-        } catch (IndexOutOfBoundsException e) {
-            printErrorMessage("This task number does not exist! :|");
-        } catch (IOException e) {
             printErrorMessage(e.getMessage());
         }
     }

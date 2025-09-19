@@ -1,3 +1,4 @@
-D |   | presentation 1 | thursday
-E |   | eat dinner | 5pm | 6pm
+D | X | presentation 1 | thursday
 T |   | read
+T |   | read book
+D |   | assignment 1 | monday
