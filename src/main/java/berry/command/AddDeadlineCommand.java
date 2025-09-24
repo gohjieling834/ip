@@ -8,15 +8,17 @@ import java.util.ArrayList;
 
 import static berry.Berry.appendToFile;
 import static berry.Berry.extractDetails;
+import static berry.Berry.printAddTaskMessage;
 
-public class AddDeadlineCommand extends AddCommand{
+public class AddDeadlineCommand extends Command {
+    private String userInput;
 
     public AddDeadlineCommand(ArrayList<Task> tasks, String userInput) {
-        super(tasks, userInput);
+        super(tasks);
+        this.userInput = userInput;
     }
 
-    @Override
-    public void add() throws IOException {
+    public void execute() throws IOException {
         String[] taskDetails = extractDetails(userInput);
         if (taskDetails.length < 2) {
             throw new ArrayIndexOutOfBoundsException("Please enter both task description and by when. Thank you :)");

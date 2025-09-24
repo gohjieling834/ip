@@ -12,7 +12,7 @@ public class ListCommand extends Command{
         super(tasks);
     }
 
-    public void print() {
+    public void execute() {
         if (tasks.isEmpty()) {
             throw new BerryException("There's no tasks in the list. Would you like to start adding tasks?");
         }

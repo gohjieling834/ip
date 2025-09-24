@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
         this.userInput = userInput;
     }
 
-    public void deleteTask() {
+    public void execute() {
         int dividerPosition = userInput.indexOf(" ");
 
         try {

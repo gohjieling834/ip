@@ -19,7 +19,7 @@ public class MarkCommand extends Command {
         this.userInput = userInput;
     }
 
-    public void toggleTaskStatus() {
+    public void execute() {
         int dividerPosition = userInput.indexOf(" ");
 
         try {

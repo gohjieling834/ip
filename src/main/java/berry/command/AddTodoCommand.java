@@ -8,14 +8,17 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import static berry.Berry.appendToFile;
+import static berry.Berry.printAddTaskMessage;
 
-public class AddTodoCommand extends AddCommand {
+public class AddTodoCommand extends Command {
+    private String userInput;
 
     public AddTodoCommand(ArrayList<Task> tasks, String userInput) {
-        super(tasks, userInput);
+        super(tasks);
+        this.userInput = userInput;
     }
 
-    public void add() throws IOException {
+    public void execute() throws IOException {
         if (userInput.trim().length() < 5) {
             throw new BerryException("Your description of todo cannot be empty!");
         }

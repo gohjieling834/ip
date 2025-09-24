@@ -137,6 +137,11 @@ public class Berry {
         System.out.println("\n" + DIVIDER + "\n" + errorMessage + "\n" + DIVIDER + "\n");
     }
 
+    public static void printAddTaskMessage(ArrayList<Task> tasks) {
+        System.out.println("\n" + DIVIDER + "\nGot it. I've added this task:\n  " + tasks.get(tasks.size() - 1)
+                + "\nNow you have " + tasks.size() + " tasks in the list.\n" + DIVIDER + "\n");
+    }
+
     public static String getUserInput(Scanner in) {
         return in.nextLine();
     }
@@ -175,28 +180,27 @@ public class Berry {
             switch (userCommand) {
             case "list":
                 ListCommand list = new ListCommand(tasks);
-                list.print();
-//                printList(tasks);
+                list.execute();
                 break;
             case "todo":
-                AddTodoCommand todo = new AddTodoCommand(tasks, userInput);
-                todo.add();
+                AddTodoCommand addTodo = new AddTodoCommand(tasks, userInput);
+                addTodo.execute();
                 break;
             case "deadline":
-                AddDeadlineCommand deadline = new AddDeadlineCommand(tasks, userInput);
-                deadline.add();
+                AddDeadlineCommand addDeadline = new AddDeadlineCommand(tasks, userInput);
+                addDeadline.execute();
                 break;
             case "event":
-                AddEventCommand event = new AddEventCommand(tasks, userInput);
-                event.add();
+                AddEventCommand addEvent = new AddEventCommand(tasks, userInput);
+                addEvent.execute();
                 break;
             case "mark":
                 MarkCommand mark = new MarkCommand(tasks, userCommand, userInput);
-                mark.toggleTaskStatus();
+                mark.execute();
                 break;
             case "delete":
                 DeleteCommand delete = new DeleteCommand(tasks, userCommand, userInput);
-                delete.deleteTask();
+                delete.execute();
                 break;
             case "bye":
                 printByeMessage();
