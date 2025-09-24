@@ -1,28 +1,34 @@
 package berry.parser;
 
-import berry.BerryException;
+import berry.command.AddDeadlineCommand;
+import berry.command.AddEventCommand;
+import berry.command.AddTodoCommand;
+import berry.command.Command;
+import berry.command.DeleteCommand;
+import berry.command.ExitCommand;
+import berry.command.ListCommand;
+import berry.command.MarkCommand;
+import berry.data.BerryException;
 
 public class Parser {
-    public static String extractCommand(String userInput) {
-        String userCommand;
+    public static Command extractCommand(String userInput) {
         if (userInput.contains("list")) {
-            userCommand = "list";
+            return new ListCommand();
         } else if (userInput.contains("todo")) {
-            userCommand = "todo";
+            return new AddTodoCommand(userInput);
         } else if (userInput.contains("deadline")) {
-            userCommand = "deadline";
+            return new AddDeadlineCommand(userInput);
         } else if (userInput.contains("event")) {
-            userCommand = "event";
+            return new AddEventCommand(userInput);
         } else if (userInput.contains("mark")) {
-            userCommand = "mark";
+            return new MarkCommand("mark", userInput);
         } else if (userInput.contains("delete")) {
-            userCommand = "delete";
+            return new DeleteCommand("delete", userInput);
         } else if (userInput.contains("bye")) {
-            userCommand = "bye";
+            return new ExitCommand();
         } else {
             throw new BerryException("Sorry, I'm not sure what you want me to do ._.");
         }
-        return userCommand;
     }
 
     public static String[] extractDetails(String userInput) {
