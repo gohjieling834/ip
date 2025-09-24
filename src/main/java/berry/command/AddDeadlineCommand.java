@@ -1,5 +1,6 @@
 package berry.command;
 
+import berry.parser.Parser;
 import berry.storage.Storage;
 import berry.task.Deadline;
 import berry.task.Task;
@@ -8,7 +9,6 @@ import berry.ui.Ui;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static berry.Berry.extractDetails;
 
 public class AddDeadlineCommand extends Command {
     private final String userInput;
@@ -21,7 +21,7 @@ public class AddDeadlineCommand extends Command {
     }
 
     public void execute() throws IOException {
-        String[] taskDetails = extractDetails(userInput);
+        String[] taskDetails = Parser.extractDetails(userInput);
         if (taskDetails.length < 2) {
             throw new ArrayIndexOutOfBoundsException("Please enter both task description and by when. Thank you :)");
         }

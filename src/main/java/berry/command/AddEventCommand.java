@@ -1,5 +1,6 @@
 package berry.command;
 
+import berry.parser.Parser;
 import berry.storage.Storage;
 import berry.task.Event;
 import berry.task.Task;
@@ -8,7 +9,6 @@ import berry.ui.Ui;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static berry.Berry.extractDetails;
 
 public class AddEventCommand extends Command {
     private final String userInput;
@@ -21,7 +21,7 @@ public class AddEventCommand extends Command {
     }
 
     public void execute() throws IOException {
-        String[] taskDetails = extractDetails(userInput);
+        String[] taskDetails = Parser.extractDetails(userInput);
         if (taskDetails.length < 3) {
             throw new ArrayIndexOutOfBoundsException("Please enter all the event detail (description, from, to). Thank you :)");
         }

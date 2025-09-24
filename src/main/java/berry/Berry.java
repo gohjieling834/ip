@@ -6,6 +6,7 @@ import berry.command.AddTodoCommand;
 import berry.command.DeleteCommand;
 import berry.command.ListCommand;
 import berry.command.MarkCommand;
+import berry.parser.Parser;
 import berry.storage.Storage;
 import berry.task.Task;
 import berry.ui.Ui;
@@ -39,37 +40,10 @@ public class Berry {
         }
     }
 
-    public static String extractCommand(String userInput) {
-        String userCommand;
-        if (userInput.contains("list")) {
-            userCommand = "list";
-        } else if (userInput.contains("todo")) {
-            userCommand = "todo";
-        } else if (userInput.contains("deadline")) {
-            userCommand = "deadline";
-        } else if (userInput.contains("event")) {
-            userCommand = "event";
-        } else if (userInput.contains("mark")) {
-            userCommand = "mark";
-        } else if (userInput.contains("delete")) {
-            userCommand = "delete";
-        } else if (userInput.contains("bye")) {
-            userCommand = "bye";
-        } else {
-            throw new BerryException("Sorry, I'm not sure what you want me to do ._.");
-        }
-        return userCommand;
-    }
-
-    public static String[] extractDetails(String userInput) {
-        int dividerPosition = userInput.indexOf(" ");
-        String task = userInput.substring(dividerPosition + 1);
-        return task.split("/");
-    }
 
     public static void executeCommand(String userInput, ArrayList<Task> tasks, Ui ui, Storage storage) {
         try {
-            String userCommand = extractCommand(userInput);
+            String userCommand = Parser.extractCommand(userInput);
             switch (userCommand) {
             case "list":
                 ListCommand list = new ListCommand(tasks, ui);
