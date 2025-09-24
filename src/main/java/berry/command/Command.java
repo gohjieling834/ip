@@ -1,19 +1,16 @@
 package berry.command;
 
-import java.io.IOException;
-import java.util.ArrayList;
-
-import berry.task.Task;
+import berry.data.TaskList;
+import berry.storage.Storage;
 import berry.ui.Ui;
 
+import java.io.IOException;
+
 public abstract class Command {
-    protected ArrayList<Task> tasks;
-    protected Ui ui;
 
-    public Command(ArrayList<Task> tasks, Ui ui) {
-        this.tasks = tasks;
-        this.ui = ui;
+    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
+
+    public boolean isExit() {
+        return false;
     }
-
-    public abstract void execute() throws IOException;
 }

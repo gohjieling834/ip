@@ -1,5 +1,6 @@
 package berry.command;
 
+import berry.data.TaskList;
 import berry.parser.Parser;
 import berry.storage.Storage;
 import berry.task.Deadline;
@@ -12,15 +13,12 @@ import java.util.ArrayList;
 
 public class AddDeadlineCommand extends Command {
     private final String userInput;
-    private final Storage storage;
 
-    public AddDeadlineCommand(ArrayList<Task> tasks, Ui ui, Storage storage, String userInput) {
-        super(tasks, ui);
-        this.storage = storage;
+    public AddDeadlineCommand(String userInput) {
         this.userInput = userInput;
     }
 
-    public void execute() throws IOException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         String[] taskDetails = Parser.extractDetails(userInput);
         if (taskDetails.length < 2) {
             throw new ArrayIndexOutOfBoundsException("Please enter both task description and by when. Thank you :)");
@@ -28,8 +26,8 @@ public class AddDeadlineCommand extends Command {
         int startIndexOfBy = taskDetails[1].indexOf("by") + 2;  // + 2 because the substring start index should begin after by
         String description = taskDetails[0].trim();
         String by = taskDetails[1].substring(startIndexOfBy).trim();
-        tasks.add(new Deadline(description, by));
-        storage.appendToFile(tasks);
-        ui.printAddTaskMessage(tasks);
+        tasks.addTask(new Deadline(description, by));
+        storage.appendToFile(tasks.getList());
+        ui.printAddTaskMessage(tasks.getList());
     }
 }

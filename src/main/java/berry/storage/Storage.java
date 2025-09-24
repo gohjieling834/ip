@@ -1,6 +1,6 @@
 package berry.storage;
 
-import berry.BerryException;
+import berry.data.BerryException;
 import berry.task.Deadline;
 import berry.task.Event;
 import berry.task.Task;
@@ -19,10 +19,15 @@ public class Storage {
     private static final String DIRECTORYPATH = "./data";
     private static final String FILEPATH = "./data/berry.txt";
     private static final String TEMPFILEPATH = "./data/temp.txt";
-    private static final File DATAFILE = new File(FILEPATH);
+    private final File dataFile;
 
-    public void loadData(ArrayList<Task> tasks) throws FileNotFoundException {
-        Scanner scan = new Scanner(DATAFILE);
+    public Storage() {
+        dataFile = new File(FILEPATH);
+    }
+
+    public ArrayList<Task> loadData() throws FileNotFoundException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner scan = new Scanner(dataFile);
         String currentLine;
         String[] taskDetails;
         while (scan.hasNext()) {
@@ -44,6 +49,7 @@ public class Storage {
             tasks.get(tasks.size() - 1).setDone(taskDetails[1].trim().equals("X"));
         }
         scan.close();
+        return tasks;
     }
 
     public void checkDirectoryExists(Ui ui) {
@@ -52,7 +58,7 @@ public class Storage {
             directory.mkdir();
         }
         try {
-            checkFileExists(DATAFILE);
+            checkFileExists(dataFile);
         } catch (IOException e) {
             ui.printErrorMessage(e.getMessage());
         }
@@ -68,7 +74,7 @@ public class Storage {
         File tempFile = new File(TEMPFILEPATH);
         checkFileExists(tempFile);
         FileWriter tempFileWriter = new FileWriter(tempFile);
-        Scanner scan = new Scanner(DATAFILE);
+        Scanner scan = new Scanner(dataFile);
         String currentLine;
         int loopIndex = 0;
         while (scan.hasNext()) {
@@ -85,8 +91,8 @@ public class Storage {
         }
         scan.close();
         tempFileWriter.close();
-        DATAFILE.delete();
-        tempFile.renameTo(DATAFILE);
+        dataFile.delete();
+        tempFile.renameTo(dataFile);
     }
 
     public void appendToFile(ArrayList<Task> tasks) throws IOException {

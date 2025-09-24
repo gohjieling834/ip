@@ -34,18 +34,18 @@ public class Ui {
                 + "\nNow you have " + tasks.size() + " tasks in the list.\n" + DIVIDER + "\n");
     }
 
-    public void printDeleteTaskMessage(Task task, int listSize){
+    public void printDeleteTaskMessage(Task task, int listSize) {
         System.out.println("\n" + DIVIDER + "\n" + "Okay, I've removed this task:\n  "
                 + task + "\n" + "Now you have " + listSize + " tasks in the list.\n"
                 + DIVIDER + "\n");
     }
 
-    public void printMarkTaskMessage(Task task, String message){
+    public void printMarkTaskMessage(Task task, String message) {
         System.out.println("\n" + DIVIDER + "\n" + message
                 + task + "\n" + DIVIDER + "\n");
     }
 
-    public void printList(ArrayList<Task> tasks){
+    public void printList(ArrayList<Task> tasks) {
         System.out.println("\n" + DIVIDER);
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + "." + tasks.get(i));
