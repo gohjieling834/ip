@@ -1,20 +1,19 @@
 package berry.command;
 
 import berry.task.Task;
+import berry.ui.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static berry.Berry.DIVIDER;
-import static berry.Berry.printErrorMessage;
 import static berry.Berry.updateFile;
 
 public class MarkCommand extends Command {
-    private String userCommand;
-    private String userInput;
+    private final String userCommand;
+    private final String userInput;
 
-    public MarkCommand(ArrayList<Task> tasks, String userCommand, String userInput) {
-        super(tasks);
+    public MarkCommand(ArrayList<Task> tasks, Ui ui, String userCommand, String userInput) {
+        super(tasks, ui);
         this.userCommand = userCommand;
         this.userInput = userInput;
     }
@@ -26,20 +25,18 @@ public class MarkCommand extends Command {
             int taskNumber = Integer.parseInt(userInput.substring(dividerPosition).trim()) - 1;
             if (userInput.contains("un")) {
                 tasks.get(taskNumber).markAsUndone();
-                System.out.println("\n" + DIVIDER + "\n" + "Okay, I've marked this task as not done yet:\n  "
-                        + tasks.get(taskNumber) + "\n" + DIVIDER + "\n");
+                ui.printMarkTaskMessage(tasks.get(taskNumber), "Okay, I've marked this task as not done yet:\n  ");
             } else {
                 tasks.get(taskNumber).markAsDone();
-                System.out.println("\n" + DIVIDER + "\n" + "Nice! I've marked this task as done:\n  "
-                        + tasks.get(taskNumber) + "\n" + DIVIDER + "\n");
+                ui.printMarkTaskMessage(tasks.get(taskNumber), "Nice! I've marked this task as done:\n  ");
             }
             updateFile(taskNumber, userCommand, tasks);
         } catch (NumberFormatException e) {
-            printErrorMessage("Sorry, I don't know which task to mark/unmark. Please enter the task number, thank you! :)");
+            ui.printErrorMessage("Sorry, I don't know which task to mark/unmark. Please enter the task number, thank you! :)");
         } catch (IndexOutOfBoundsException e) {
-            printErrorMessage("This task number does not exist! :|");
+            ui.printErrorMessage("This task number does not exist! :|");
         } catch (IOException e) {
-            printErrorMessage(e.getMessage());
+            ui.printErrorMessage(e.getMessage());
         }
     }
 }

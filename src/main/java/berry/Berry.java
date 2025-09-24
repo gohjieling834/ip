@@ -10,6 +10,7 @@ import berry.task.Deadline;
 import berry.task.Event;
 import berry.task.Task;
 import berry.task.Todo;
+import berry.ui.Ui;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -19,8 +20,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Berry {
-    public static final String DIVIDER = "‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧";
-    public static final String CHATBOT_NAME = "Berry";
+
     public static final String DIRECTORYPATH = "./data";
     public static final String FILEPATH = "./data/berry.txt";
     public static final String TEMPFILEPATH = "./data/temp.txt";
@@ -30,21 +30,22 @@ public class Berry {
     public static void main(String[] args) {
         String userInput;
         ArrayList<Task> tasks = new ArrayList<>();
+        Ui ui = new Ui();
 
-        start(tasks);
+        start(tasks, ui);
         while (true) {
-            userInput = getUserInput(IN);
-            executeCommand(userInput, tasks);
+            userInput = ui.getUserInput();
+            executeCommand(userInput, tasks, ui);
         }
     }
 
-    private static void start(ArrayList<Task> tasks) {
+    private static void start(ArrayList<Task> tasks, Ui ui) {
         try {
-            checkDirectoryExists();
+            checkDirectoryExists(ui);
             loadData(tasks);
-            printHelloMessage();
+            ui.printHelloMessage();
         } catch (FileNotFoundException | BerryException e) {
-            printErrorMessage(e.getMessage());
+            ui.printErrorMessage(e.getMessage());
         }
     }
 
@@ -73,7 +74,7 @@ public class Berry {
         scan.close();
     }
 
-    private static void checkDirectoryExists() {
+    private static void checkDirectoryExists(Ui ui) {
         File directory = new File(DIRECTORYPATH);
         if (!directory.exists()) {
             directory.mkdir();
@@ -81,7 +82,7 @@ public class Berry {
         try {
             checkFileExists(DATAFILE);
         } catch (IOException e) {
-            printErrorMessage(e.getMessage());
+            ui.printErrorMessage(e.getMessage());
         }
     }
 
@@ -123,28 +124,7 @@ public class Berry {
         fw.close();
     }
 
-    public static void printHelloMessage() {
-        System.out.println(DIVIDER + "\n" + "Hello! I'm " + CHATBOT_NAME
-                + "\nWhat can I do for you?" + "\n" + DIVIDER + "\n");
-    }
 
-    public static void printByeMessage() {
-        System.out.println("\n" + DIVIDER + "\nBye. Hope to see you again soon!"
-                + "\n" + DIVIDER);
-    }
-
-    public static void printErrorMessage(String errorMessage) {
-        System.out.println("\n" + DIVIDER + "\n" + errorMessage + "\n" + DIVIDER + "\n");
-    }
-
-    public static void printAddTaskMessage(ArrayList<Task> tasks) {
-        System.out.println("\n" + DIVIDER + "\nGot it. I've added this task:\n  " + tasks.get(tasks.size() - 1)
-                + "\nNow you have " + tasks.size() + " tasks in the list.\n" + DIVIDER + "\n");
-    }
-
-    public static String getUserInput(Scanner in) {
-        return in.nextLine();
-    }
 
     public static String extractCommand(String userInput) {
         String userCommand;
@@ -174,41 +154,41 @@ public class Berry {
         return task.split("/");
     }
 
-    public static void executeCommand(String userInput, ArrayList<Task> tasks) {
+    public static void executeCommand(String userInput, ArrayList<Task> tasks, Ui ui) {
         try {
             String userCommand = extractCommand(userInput);
             switch (userCommand) {
             case "list":
-                ListCommand list = new ListCommand(tasks);
+                ListCommand list = new ListCommand(tasks, ui);
                 list.execute();
                 break;
             case "todo":
-                AddTodoCommand addTodo = new AddTodoCommand(tasks, userInput);
+                AddTodoCommand addTodo = new AddTodoCommand(tasks, ui, userInput);
                 addTodo.execute();
                 break;
             case "deadline":
-                AddDeadlineCommand addDeadline = new AddDeadlineCommand(tasks, userInput);
+                AddDeadlineCommand addDeadline = new AddDeadlineCommand(tasks, ui, userInput);
                 addDeadline.execute();
                 break;
             case "event":
-                AddEventCommand addEvent = new AddEventCommand(tasks, userInput);
+                AddEventCommand addEvent = new AddEventCommand(tasks, ui, userInput);
                 addEvent.execute();
                 break;
             case "mark":
-                MarkCommand mark = new MarkCommand(tasks, userCommand, userInput);
+                MarkCommand mark = new MarkCommand(tasks, ui, userCommand, userInput);
                 mark.execute();
                 break;
             case "delete":
-                DeleteCommand delete = new DeleteCommand(tasks, userCommand, userInput);
+                DeleteCommand delete = new DeleteCommand(tasks, ui, userCommand, userInput);
                 delete.execute();
                 break;
             case "bye":
-                printByeMessage();
+                ui.printByeMessage();
                 System.exit(0);
                 // Fallthrough
             }
         } catch (BerryException | ArrayIndexOutOfBoundsException | IOException e) {
-            printErrorMessage(e.getMessage());
+            ui.printErrorMessage(e.getMessage());
         }
     }
 }

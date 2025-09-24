@@ -2,19 +2,19 @@ package berry.command;
 
 import berry.task.Event;
 import berry.task.Task;
+import berry.ui.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static berry.Berry.appendToFile;
 import static berry.Berry.extractDetails;
-import static berry.Berry.printAddTaskMessage;
 
 public class AddEventCommand extends Command {
-    private String userInput;
+    private final String userInput;
 
-    public AddEventCommand(ArrayList<Task> tasks, String userInput){
-        super(tasks);
+    public AddEventCommand(ArrayList<Task> tasks, Ui ui, String userInput){
+        super(tasks, ui);
         this.userInput = userInput;
     }
 
@@ -30,6 +30,6 @@ public class AddEventCommand extends Command {
         String to = taskDetails[2].substring(startIndexOfTo).trim();
         tasks.add(new Event(description, from, to));
         appendToFile(tasks);
-        printAddTaskMessage(tasks);
+        ui.printAddTaskMessage(tasks);
     }
 }

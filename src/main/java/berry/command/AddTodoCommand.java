@@ -3,18 +3,18 @@ package berry.command;
 import berry.BerryException;
 import berry.task.Task;
 import berry.task.Todo;
+import berry.ui.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
 import static berry.Berry.appendToFile;
-import static berry.Berry.printAddTaskMessage;
 
 public class AddTodoCommand extends Command {
-    private String userInput;
+    private final String userInput;
 
-    public AddTodoCommand(ArrayList<Task> tasks, String userInput) {
-        super(tasks);
+    public AddTodoCommand(ArrayList<Task> tasks, Ui ui, String userInput) {
+        super(tasks, ui);
         this.userInput = userInput;
     }
 
@@ -25,7 +25,7 @@ public class AddTodoCommand extends Command {
         String description = userInput.substring(5).trim();
         tasks.add(new Todo(description));
         appendToFile(tasks);
-        printAddTaskMessage(tasks);
+        ui.printAddTaskMessage(tasks);
     }
 
 }

@@ -1,20 +1,19 @@
 package berry.command;
 
 import berry.task.Task;
+import berry.ui.Ui;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import static berry.Berry.DIVIDER;
-import static berry.Berry.printErrorMessage;
 import static berry.Berry.updateFile;
 
 public class DeleteCommand extends Command {
-    private String userInput;
-    private String userCommand;
+    private final String userInput;
+    private final String userCommand;
 
-    public DeleteCommand(ArrayList<Task> tasks, String userCommand, String userInput) {
-        super(tasks);
+    public DeleteCommand(ArrayList<Task> tasks, Ui ui, String userCommand, String userInput) {
+        super(tasks, ui);
         this.userCommand = userCommand;
         this.userInput = userInput;
     }
@@ -24,16 +23,14 @@ public class DeleteCommand extends Command {
 
         try {
             int taskNumber = Integer.parseInt(userInput.substring(dividerPosition).trim()) - 1;
-            System.out.println("\n" + DIVIDER + "\n" + "Okay, I've removed this task:\n  "
-                    + tasks.remove(taskNumber) + "\n" + "Now you have " + tasks.size() + " tasks in the list.\n"
-                    + DIVIDER + "\n");
+            ui.printDeleteTaskMessage(tasks.remove(taskNumber), tasks.size());
             updateFile(taskNumber, userCommand, tasks);
         } catch (NumberFormatException e) {
-            printErrorMessage("Sorry, I don't know which task to delete. Please enter the task number, thank you! :)");
+            ui.printErrorMessage("Sorry, I don't know which task to delete. Please enter the task number, thank you! :)");
         } catch (IndexOutOfBoundsException e) {
-            printErrorMessage("This task number does not exist! :|");
+            ui.printErrorMessage("This task number does not exist! :|");
         } catch (IOException e) {
-            printErrorMessage(e.getMessage());
+            ui.printErrorMessage(e.getMessage());
         }
     }
 }
