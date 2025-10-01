@@ -4,11 +4,9 @@ import berry.data.TaskList;
 import berry.parser.Parser;
 import berry.storage.Storage;
 import berry.task.Event;
-import berry.task.Task;
 import berry.ui.Ui;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class AddEventCommand extends Command {

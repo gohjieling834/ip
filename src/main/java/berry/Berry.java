@@ -34,7 +34,7 @@ public class Berry {
                 Command command = Parser.extractCommand(fullCommand);
                 command.execute(tasks, ui, storage);
                 isExit = command.isExit();
-            } catch (IOException | BerryException e) {
+            } catch (IOException | BerryException | ArrayIndexOutOfBoundsException e) {
                 ui.printErrorMessage(e.getMessage());
             }
         }

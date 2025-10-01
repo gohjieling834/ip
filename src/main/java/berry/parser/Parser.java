@@ -11,22 +11,27 @@ import berry.command.MarkCommand;
 import berry.data.BerryException;
 
 public class Parser {
+    // extractCommand method inspired by
+    // https://github.com/nus-cs2113-AY2526S1/personbook/blob/master/src/main/java/seedu/personbook/parser/Parser.java
+
     public static Command extractCommand(String userInput) {
-        if (userInput.contains("list")) {
+        String[] words = userInput.split(" ", 2);   // split the input into command and details
+        switch (words[0].trim()) {
+        case "list":
             return new ListCommand();
-        } else if (userInput.contains("todo")) {
+        case "todo":
             return new AddTodoCommand(userInput);
-        } else if (userInput.contains("deadline")) {
+        case "deadline":
             return new AddDeadlineCommand(userInput);
-        } else if (userInput.contains("event")) {
+        case "event":
             return new AddEventCommand(userInput);
-        } else if (userInput.contains("mark")) {
+        case "mark":
             return new MarkCommand("mark", userInput);
-        } else if (userInput.contains("delete")) {
+        case "delete":
             return new DeleteCommand("delete", userInput);
-        } else if (userInput.contains("bye")) {
+        case "bye":
             return new ExitCommand();
-        } else {
+        default:
             throw new BerryException("Sorry, I'm not sure what you want me to do ._.");
         }
     }

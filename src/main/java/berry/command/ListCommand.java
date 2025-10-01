@@ -3,10 +3,7 @@ package berry.command;
 import berry.data.BerryException;
 import berry.data.TaskList;
 import berry.storage.Storage;
-import berry.task.Task;
 import berry.ui.Ui;
-
-import java.util.ArrayList;
 
 
 public class ListCommand extends Command {
