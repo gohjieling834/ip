@@ -1,5 +1,8 @@
 package berry.task;
 
+/**
+ * Represents an Event to attend that starts from and ends at a specified data/time or both.
+ */
 public class Event extends Task {
     private String from;
     private String to;

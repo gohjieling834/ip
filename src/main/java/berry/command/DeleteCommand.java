@@ -6,7 +6,9 @@ import berry.ui.Ui;
 
 import java.io.IOException;
 
-
+/**
+ * Represents a command that deletes a task from the task list.
+ */
 public class DeleteCommand extends Command {
     private final String userInput;
     private final String userCommand;
@@ -16,6 +18,20 @@ public class DeleteCommand extends Command {
         this.userInput = userInput;
     }
 
+    /**
+     * Executes the command to delete a task from the {@link TaskList}.
+     * <p>
+     * This method parses the user input to identify the task number, removes
+     * the corresponding task from the list, updates berry.txt, and displays
+     * a confirmation message to the user. If the user input is invalid
+     * (e.g. non-numeric or out-of-range task number), an error message
+     * is displayed instead. Any I/O errors when updating storage will also
+     * display an error message.
+     *
+     * @param tasks   List that holds all current tasks.
+     * @param ui      Ui instance used to display messages to the user.
+     * @param storage Storage instance used to update berry.txt.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         int dividerPosition = userInput.indexOf(" ");
 

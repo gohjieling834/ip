@@ -1,5 +1,9 @@
 package berry.task;
 
+/**
+ * Represents a Deadline task. A {@code Deadline} object corresponds to a task
+ * with a deadline specified as a date/time or both.
+ */
 public class Deadline extends Task {
     private String by;
 
