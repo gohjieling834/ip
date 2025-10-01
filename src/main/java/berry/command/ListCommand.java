@@ -12,6 +12,6 @@ public class ListCommand extends Command {
         if (tasks.isEmpty()) {
             throw new BerryException("There's no tasks in the list. Would you like to start adding tasks?");
         }
-        ui.printList(tasks.getList());
+        ui.printList(tasks.getList(), "");
     }
 }

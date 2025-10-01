@@ -6,6 +6,7 @@ import berry.command.AddTodoCommand;
 import berry.command.Command;
 import berry.command.DeleteCommand;
 import berry.command.ExitCommand;
+import berry.command.FindCommand;
 import berry.command.ListCommand;
 import berry.command.MarkCommand;
 import berry.data.BerryException;
@@ -20,17 +21,19 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "todo":
-            return new AddTodoCommand(userInput);
+            return new AddTodoCommand(words[1]);
         case "deadline":
-            return new AddDeadlineCommand(userInput);
+            return new AddDeadlineCommand(words[1]);
         case "event":
-            return new AddEventCommand(userInput);
+            return new AddEventCommand(words[1]);
         case "unmark":
             // fall through
         case "mark":
             return new MarkCommand("mark", userInput);
         case "delete":
             return new DeleteCommand("delete", userInput);
+        case "find":
+            return new FindCommand(words[1]);
         case "bye":
             return new ExitCommand();
         default:
@@ -39,8 +42,6 @@ public class Parser {
     }
 
     public static String[] extractDetails(String userInput) {
-        int dividerPosition = userInput.indexOf(" ");
-        String task = userInput.substring(dividerPosition + 1);
-        return task.split("/");
+        return userInput.split("/");
     }
 }

@@ -5,10 +5,8 @@ import berry.task.Deadline;
 import berry.task.Event;
 import berry.task.Task;
 import berry.task.Todo;
-import berry.ui.Ui;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,7 +23,8 @@ public class Storage {
         dataFile = new File(FILEPATH);
     }
 
-    public ArrayList<Task> loadData() throws FileNotFoundException {
+    public ArrayList<Task> loadData() throws IOException {
+        checkDirectoryExists();
         ArrayList<Task> tasks = new ArrayList<>();
         Scanner scan = new Scanner(dataFile);
         String currentLine;
@@ -52,16 +51,12 @@ public class Storage {
         return tasks;
     }
 
-    public void checkDirectoryExists(Ui ui) {
+    public void checkDirectoryExists() throws IOException {
         File directory = new File(DIRECTORYPATH);
         if (!directory.exists()) {
             directory.mkdir();
         }
-        try {
-            checkFileExists(dataFile);
-        } catch (IOException e) {
-            ui.printErrorMessage(e.getMessage());
-        }
+        checkFileExists(dataFile);
     }
 
     public void checkFileExists(File file) throws IOException {

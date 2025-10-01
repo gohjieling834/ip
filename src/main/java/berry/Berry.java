@@ -7,7 +7,6 @@ import berry.parser.Parser;
 import berry.storage.Storage;
 import berry.ui.Ui;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class Berry {
@@ -20,7 +19,7 @@ public class Berry {
         storage = new Storage();
         try {
             tasks = new TaskList(storage.loadData());
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             ui.printErrorMessage(e.getMessage());
         }
     }

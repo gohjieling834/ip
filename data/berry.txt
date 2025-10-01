@@ -1,2 +1,5 @@
-T |   | read assignment brief
-D |   | ip task | 3 oct
+T | X | finish ip tasks
+D | X | ip | 3 Oct
+T |   | watch CS2113 Lectures
+D | X | return book | 12 oct
+T |   | fix bugs
