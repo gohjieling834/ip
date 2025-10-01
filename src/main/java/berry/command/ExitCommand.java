@@ -4,14 +4,14 @@ import berry.data.TaskList;
 import berry.storage.Storage;
 import berry.ui.Ui;
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.printByeMessage();
     }
 
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 }
