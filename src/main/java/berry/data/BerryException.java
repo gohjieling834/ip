@@ -1,4 +1,4 @@
-package berry;
+package berry.data;
 
 public class BerryException extends RuntimeException {
     public BerryException(String message) {

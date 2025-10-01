@@ -1,4 +1,2 @@
-T | X | test code
-T |   | read
-E | X | eat dinner with friends | 5pm | 6pm
-T |   | read
+T |   | read assignment brief
+D |   | ip task | 3 oct
