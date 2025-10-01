@@ -24,6 +24,9 @@ public class Berry {
         }
     }
 
+    /**
+     * Runs the chatbot.
+     */
     public void run() {
         ui.printHelloMessage();
         boolean isExit = false;

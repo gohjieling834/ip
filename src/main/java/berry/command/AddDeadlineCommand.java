@@ -8,16 +8,26 @@ import berry.ui.Ui;
 
 import java.io.IOException;
 
-
+/**
+ * Represents a command that adds a {@link Deadline} to the task list.
+ */
 public class AddDeadlineCommand extends Command {
-    private final String userInput;
+    private final String taskDetailsInput;
 
-    public AddDeadlineCommand(String userInput) {
-        this.userInput = userInput;
+    public AddDeadlineCommand(String taskDetailsInput) {
+        this.taskDetailsInput = taskDetailsInput;
     }
 
+    /**
+     * Executes the command to add a {@link Deadline} task to the {@link TaskList}.
+     *
+     * @param tasks   List that holds all current tasks.
+     * @param ui      Ui instance used to display messages to the user.
+     * @param storage Storage instance used to update berry.txt.
+     * @throws IOException If either task description or by is not specified by user.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        String[] taskDetails = Parser.extractDetails(userInput);
+        String[] taskDetails = Parser.splitDetails(taskDetailsInput);
         if (taskDetails.length < 2) {
             throw new ArrayIndexOutOfBoundsException("Please enter both task description and by when. Thank you :)");
         }

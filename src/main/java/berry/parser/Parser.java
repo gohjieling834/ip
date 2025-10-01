@@ -11,10 +11,22 @@ import berry.command.ListCommand;
 import berry.command.MarkCommand;
 import berry.data.BerryException;
 
+/**
+ * Handles the parsing of user input into structured commands and task details.
+ */
 public class Parser {
     // extractCommand method inspired by
     // https://github.com/nus-cs2113-AY2526S1/personbook/blob/master/src/main/java/seedu/personbook/parser/Parser.java
 
+    /**
+     * Returns the command specified by the user.
+     * <p>
+     * This method instantiates the appropriate {@link Command} subclass.
+     * If the command is invalid, an error message is displayed.
+     *
+     * @param userInput The full string entered by the user.
+     * @return a Command object that represents the user's command.
+     */
     public static Command extractCommand(String userInput) {
         String[] words = userInput.split(" ", 2);   // split the input into command and details
         switch (words[0].trim()) {
@@ -41,7 +53,13 @@ public class Parser {
         }
     }
 
-    public static String[] extractDetails(String userInput) {
-        return userInput.split("/");
+    /**
+     * Extracts the task details from the user input.
+     *
+     * @param taskDetailsInput The part of the user's input string that contains only the task details.
+     * @return an array of strings representing the extracted task details.
+     */
+    public static String[] splitDetails(String taskDetailsInput) {
+        return taskDetailsInput.split("/");
     }
 }

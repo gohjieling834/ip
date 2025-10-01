@@ -1,5 +1,8 @@
 package berry.task;
 
+/**
+ * Represents a task to complete.
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

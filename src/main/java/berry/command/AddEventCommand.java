@@ -3,21 +3,32 @@ package berry.command;
 import berry.data.TaskList;
 import berry.parser.Parser;
 import berry.storage.Storage;
+import berry.task.Deadline;
 import berry.task.Event;
 import berry.ui.Ui;
 
 import java.io.IOException;
 
-
+/**
+ * Represents a command that adds a {@link Event} to the task list.
+ */
 public class AddEventCommand extends Command {
-    private final String userInput;
+    private final String taskDetailsInput;
 
-    public AddEventCommand(String userInput) {
-        this.userInput = userInput;
+    public AddEventCommand(String taskDetailsInput) {
+        this.taskDetailsInput = taskDetailsInput;
     }
 
+    /**
+     * Executes the command to add a {@link Event} task to the {@link TaskList}.
+     *
+     * @param tasks   List that holds all current tasks.
+     * @param ui      Ui instance used to display messages to the user.
+     * @param storage Storage instance used to update berry.txt.
+     * @throws IOException If task description or from or to is not specified by user.
+     */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        String[] taskDetails = Parser.extractDetails(userInput);
+        String[] taskDetails = Parser.splitDetails(taskDetailsInput);
         if (taskDetails.length < 3) {
             throw new ArrayIndexOutOfBoundsException("Please enter all the event detail (description, from, to). Thank you :)");
         }
