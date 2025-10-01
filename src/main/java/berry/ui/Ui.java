@@ -45,12 +45,17 @@ public class Ui {
                 + task + "\n" + DIVIDER + "\n");
     }
 
-    public void printList(ArrayList<Task> tasks) {
+    public void printList(ArrayList<Task> tasks, String message) {
         System.out.println("\n" + DIVIDER);
+        printListMessage(message);
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + "." + tasks.get(i));
         }
         System.out.println(DIVIDER + "\n");
+    }
+
+    public void printListMessage(String message) {
+        System.out.print(message);
     }
 
     public String getUserInput() {

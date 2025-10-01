@@ -18,11 +18,10 @@ public class AddTodoCommand extends Command {
     }
 
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        if (userInput.trim().length() < 5) {
+        if (userInput.trim().isEmpty()) {
             throw new BerryException("Your description of todo cannot be empty!");
         }
-        String description = userInput.substring(5).trim();
-        tasks.addTask(new Todo(description));
+        tasks.addTask(new Todo(userInput));
         storage.appendToFile(tasks.getList());
         ui.printAddTaskMessage(tasks.getList());
     }
