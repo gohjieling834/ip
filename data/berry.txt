@@ -1,3 +1,2 @@
-T |   | read book
-D |   | assignment 1 | monday
-E |   | meeting | 9pm | 10pm
+T |   | read assignment brief
+D |   | ip task | 3 oct

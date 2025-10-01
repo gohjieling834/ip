@@ -25,6 +25,8 @@ public class Parser {
             return new AddDeadlineCommand(userInput);
         case "event":
             return new AddEventCommand(userInput);
+        case "unmark":
+            // fall through
         case "mark":
             return new MarkCommand("mark", userInput);
         case "delete":
