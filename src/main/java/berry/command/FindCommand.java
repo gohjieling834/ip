@@ -31,7 +31,7 @@ public class FindCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList tasksFound = new TaskList(findTasks(tasks));
-        if(tasksFound.isEmpty()){
+        if (tasksFound.isEmpty()) {
             throw new BerryException("No tasks found containing: " + keyword);
         }
         ui.printList(tasksFound.getList(), "Here are the matching tasks in your list:\n");

@@ -36,9 +36,15 @@ public class MarkCommand extends Command {
 
         try {
             int taskNumber = Integer.parseInt(userInput.substring(dividerPosition).trim()) - 1;
-            if (userInput.contains("un")) {
+            boolean isUnmarkCommand = userInput.contains("un");
+            boolean isDone = tasks.getTask(taskNumber).isDone();
+            if (isUnmarkCommand && isDone) {
                 tasks.getTask(taskNumber).markAsUndone();
                 ui.printMarkTaskMessage(tasks.getTask(taskNumber), "Okay, I've marked this task as not done yet:\n  ");
+            } else if (isUnmarkCommand && !isDone) {
+                ui.printMarkTaskMessage(tasks.getTask(taskNumber), "This task is already marked as not done:\n  ");
+            } else if (!isUnmarkCommand && isDone) {
+                ui.printMarkTaskMessage(tasks.getTask(taskNumber), "This task is already marked as done:\n  ");
             } else {
                 tasks.getTask(taskNumber).markAsDone();
                 ui.printMarkTaskMessage(tasks.getTask(taskNumber), "Nice! I've marked this task as done:\n  ");
