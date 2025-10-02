@@ -10,6 +10,11 @@ import java.util.ArrayList;
 public class TaskList {
     private final ArrayList<Task> tasks;
 
+    /**
+     * Creates a new TaskList initialised with the given list of tasks.
+     *
+     * @param tasks The list of tasks to populate this TaskList with.
+     */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }

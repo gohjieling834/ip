@@ -14,6 +14,11 @@ public class Berry {
     private final Storage storage;
     private TaskList tasks;
 
+    /**
+     * Creates a new Berry application instance. Initialises the user interface,
+     * storage, and task list. Loads previously saved tasks from storage if available.
+     * If loading fails, prints an error message.
+     */
     public Berry() {
         ui = new Ui();
         storage = new Storage();

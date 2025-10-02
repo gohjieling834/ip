@@ -15,6 +15,14 @@ public class MarkCommand extends Command {
     private final String number;
     private final boolean isMarkCommand;
 
+    /**
+     * Creates a new MarkCommand to either mark or unmark a task.
+     *
+     * @param number        The task number (as a String) provided by the user,
+     *                      representing the position of the task in the list.
+     * @param isMarkCommand True if the command is to mark the task as done, false if the command
+     *                      is to unmark the task.
+     */
     public MarkCommand(String number, boolean isMarkCommand) {
         this.number = number;
         this.isMarkCommand = isMarkCommand;

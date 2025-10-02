@@ -1,5 +1,5 @@
 T | X | finish ip tasks
 D | X | ip | 3 Oct
 T |   | watch CS2113 Lectures
-D | X | return book | 12 oct
+D | X | return book | 12 Oct
 T |   | fix bugs

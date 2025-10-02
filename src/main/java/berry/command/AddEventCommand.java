@@ -14,6 +14,11 @@ import java.io.IOException;
 public class AddEventCommand extends Command {
     private final String taskDetailsInput;
 
+    /**
+     * Creates a new AddEventCommand with the specified task details.
+     *
+     * @param taskDetailsInput The raw user input string containing the details of the event task.
+     */
     public AddEventCommand(String taskDetailsInput) {
         this.taskDetailsInput = taskDetailsInput;
     }

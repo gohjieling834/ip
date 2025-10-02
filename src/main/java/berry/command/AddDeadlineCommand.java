@@ -14,6 +14,11 @@ import java.io.IOException;
 public class AddDeadlineCommand extends Command {
     private final String taskDetailsInput;
 
+    /**
+     * Creates a new AddDeadlineCommand with the specified task details.
+     *
+     * @param taskDetailsInput The raw user input string containing the details of the deadline task.
+     */
     public AddDeadlineCommand(String taskDetailsInput) {
         this.taskDetailsInput = taskDetailsInput;
     }

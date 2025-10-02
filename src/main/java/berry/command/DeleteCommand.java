@@ -13,9 +13,14 @@ public class DeleteCommand extends Command {
     private static final String COMMAND = "delete";
     private final String number;
 
+    /**
+     * Creates a new DeleteCommand for deleting a task at the specified position.
+     *
+     * @param number The task number (as a String) provided by the user,
+     *               representing the position of the task in the list to delete.
+     */
     public DeleteCommand(String number) {
         this.number = number;
-
     }
 
     /**
