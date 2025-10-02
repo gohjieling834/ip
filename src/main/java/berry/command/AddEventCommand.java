@@ -3,7 +3,6 @@ package berry.command;
 import berry.data.TaskList;
 import berry.parser.Parser;
 import berry.storage.Storage;
-import berry.task.Deadline;
 import berry.task.Event;
 import berry.ui.Ui;
 
