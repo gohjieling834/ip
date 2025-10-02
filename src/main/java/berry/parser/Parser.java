@@ -39,11 +39,11 @@ public class Parser {
         case "event":
             return new AddEventCommand(words[1]);
         case "unmark":
-            // fall through
+            return new MarkCommand(words[1], false);
         case "mark":
-            return new MarkCommand("mark", userInput);
+            return new MarkCommand(words[1], true);
         case "delete":
-            return new DeleteCommand("delete", userInput);
+            return new DeleteCommand(words[1]);
         case "find":
             return new FindCommand(words[1]);
         case "bye":

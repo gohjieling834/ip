@@ -22,6 +22,10 @@ public class Storage {
     private static final String TEMPFILEPATH = "./data/temp.txt";
     private final File dataFile;
 
+    /**
+     * Creates a new Storage object. Initialises the data file reference to the
+     * default file path defined by {@code FILEPATH}
+     */
     public Storage() {
         dataFile = new File(FILEPATH);
     }

@@ -3,7 +3,6 @@ package berry.command;
 import berry.data.BerryException;
 import berry.data.TaskList;
 import berry.storage.Storage;
-import berry.task.Deadline;
 import berry.task.Todo;
 import berry.ui.Ui;
 
@@ -14,10 +13,15 @@ import java.io.IOException;
  */
 public class AddTodoCommand extends Command {
 
-    private final String userInput;
+    private final String taskDetailsInput;
 
-    public AddTodoCommand(String userInput) {
-        this.userInput = userInput;
+    /**
+     * Creates a new AddTodoCommand with the specified task details.
+     *
+     * @param taskDetailsInput The raw user input string containing the details of the Todo task.
+     */
+    public AddTodoCommand(String taskDetailsInput) {
+        this.taskDetailsInput = taskDetailsInput;
     }
 
     /**
@@ -29,10 +33,10 @@ public class AddTodoCommand extends Command {
      * @throws IOException If the task description is not specified by user.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        if (userInput.trim().isEmpty()) {
+        if (taskDetailsInput.trim().isEmpty()) {
             throw new BerryException("Your description of todo cannot be empty!");
         }
-        tasks.addTask(new Todo(userInput));
+        tasks.addTask(new Todo(taskDetailsInput));
         storage.appendToFile(tasks.getList());
         ui.printAddTaskMessage(tasks.getList());
     }

@@ -84,23 +84,11 @@ public class Ui {
      */
     public void printList(ArrayList<Task> tasks, String message) {
         System.out.println("\n" + DIVIDER);
-        printListMessage(message);
+        System.out.print(message);
         for (int i = 0; i < tasks.size(); i++) {
             System.out.println(i + 1 + "." + tasks.get(i));
         }
         System.out.println(DIVIDER + "\n");
-    }
-
-    /**
-     * Prints a message.
-     * <p>
-     * This method is used when printing a list, to print the header message
-     * before printing the list from the 'find' command.
-     *
-     * @param message The message to display.
-     */
-    public void printListMessage(String message) {
-        System.out.print(message);
     }
 
     /**
