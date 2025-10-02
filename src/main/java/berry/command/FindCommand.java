@@ -1,5 +1,6 @@
 package berry.command;
 
+import berry.data.BerryException;
 import berry.data.TaskList;
 import berry.storage.Storage;
 import berry.task.Task;
@@ -26,9 +27,13 @@ public class FindCommand extends Command {
      * @param tasks   List that holds all current tasks.
      * @param ui      Ui instance used to display messages to the user.
      * @param storage Storage instance used to update berry.txt.
+     * @throws BerryException If no tasks are found containing the keyword.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList tasksFound = new TaskList(findTasks(tasks));
+        if (tasksFound.isEmpty()) {
+            throw new BerryException("No tasks found containing: " + keyword);
+        }
         ui.printList(tasksFound.getList(), "Here are the matching tasks in your list:\n");
     }
 
