@@ -1,12 +1,25 @@
 # Berry User Guide
 
-// Product screenshot goes here
+<img width="462" height="479" alt="Image" src="https://github.com/user-attachments/assets/0973a6a3-20ca-4b85-98c4-e63ba906bdc0" />
 
 Berry is a personal assistant chatbot that helps you manage and keep track of your tasks. It is optimized for use
 through a Command Line Interface (CLI), making it especially efficient for fast typists. Compared to traditional
 GUI-based apps, Berry provides a quicker way to stay organized.
 
-## Adding todos
+## Features
+
+> Notes about command format:
+> - Words in `UPPER_CASE` are the parameters to be supplied by the user. e.g. in `todo DESCRIPTION`, `DESCRIPTION` is a
+    parameter which can be used as todo Read.
+>
+>
+> - Commands should all be in lower case. e.g. the `find` command should be **find** and **not** Find or FIND.
+>
+>
+> - Extraneous parameters for commands that do not take in parameters (such as `list` and `bye`) will be ignored. e.g.
+    if the command specifies `list 231`, it will be interpreted as `list`.
+
+### Adding todos
 
 Adds a todo task to the task list.
 
@@ -27,7 +40,7 @@ Now you have 1 tasks in the list.
 ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 ```
 
-## Adding deadlines
+### Adding deadlines
 
 Adds a deadline task to the task list.
 
@@ -39,7 +52,7 @@ Examples:
 - `deadline Submit report /by 11.59pm`
 - `deadline Finish book /by 8 Oct`
 
-// A description of the expected outcome goes here
+Expected Outcome:
 
 ```
 ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
@@ -49,7 +62,7 @@ Now you have 2 tasks in the list.
 ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 ```
 
-## Adding event
+### Adding events
 
 Adds an event task to the task list.
 
@@ -70,7 +83,7 @@ Now you have 3 tasks in the list.
 ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 ```
 
-## Listing all tasks
+### Listing all tasks
 
 Shows a list of all tasks in the task list.
 
@@ -86,7 +99,7 @@ Expected Outcome:
 ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 ```
 
-## Deleting a task
+### Deleting a task
 
 Deletes a task from the task list.
 
@@ -106,9 +119,10 @@ Now you have 2 tasks in the list.
 ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 ```
 
-## Marking a task
+### Marking a task
 
 Marks a task as done in the task list.
+> **Note:** Marking a task that is marked will show a message saying that the task is already marked.
 
 Format: `mark NUMBER`
 
@@ -125,9 +139,10 @@ Nice! I've marked this task as done:
 ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 ```
 
-## Unmarking a task
+### Unmarking a task
 
 Marks a task as **not** done in the task list.
+> **Note:** Unmarking a task that is unmarked will show a message saying that the task is already unmarked. 
 
 Format: `unmark NUMBER`
 
@@ -144,7 +159,7 @@ Okay, I've marked this task as not done yet:
 ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 ```
 
-## Finding a task
+### Finding a task
 
 Finds tasks that contains the keyword in the description.
 
@@ -163,13 +178,13 @@ Here are the matching tasks in your list:
 ‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
 ```
 
-## Exiting the program
+### Exiting the program
 
 Exits the program.
 
 Format: `bye`
 
-## Saving the data
+### Saving the data
 
 Task list data are saved in the hard disk automatically after any command that changes the data. There is no need to
 save the data manually.
