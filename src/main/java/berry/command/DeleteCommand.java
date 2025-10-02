@@ -10,12 +10,12 @@ import java.io.IOException;
  * Represents a command that deletes a task from the task list.
  */
 public class DeleteCommand extends Command {
-    private final String userInput;
-    private final String userCommand;
+    private static final String COMMAND = "delete";
+    private final String number;
 
-    public DeleteCommand(String userCommand, String userInput) {
-        this.userCommand = userCommand;
-        this.userInput = userInput;
+    public DeleteCommand(String number) {
+        this.number = number;
+
     }
 
     /**
@@ -33,12 +33,11 @@ public class DeleteCommand extends Command {
      * @param storage Storage instance used to update berry.txt.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        int dividerPosition = userInput.indexOf(" ");
 
         try {
-            int taskNumber = Integer.parseInt(userInput.substring(dividerPosition).trim()) - 1;
+            int taskNumber = Integer.parseInt(number.trim()) - 1;
             ui.printDeleteTaskMessage(tasks.removeTask(taskNumber), tasks.getSize());
-            storage.updateFile(taskNumber, userCommand, tasks.getList());
+            storage.updateFile(taskNumber, COMMAND, tasks.getList());
         } catch (NumberFormatException e) {
             ui.printErrorMessage("Sorry, I don't know which task to delete. Please enter the task number, thank you! :)");
         } catch (IndexOutOfBoundsException e) {
