@@ -30,7 +30,8 @@ public class AddTodoCommand extends Command {
      * @param tasks   List that holds all current tasks.
      * @param ui      Ui instance used to display messages to the user.
      * @param storage Storage instance used to update berry.txt.
-     * @throws IOException If the task description is not specified by user.
+     * @throws IOException If an error occurs when appending to the file.
+     * @throws BerryException If the task description is not specified by user.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         if (taskDetailsInput.trim().isEmpty()) {
