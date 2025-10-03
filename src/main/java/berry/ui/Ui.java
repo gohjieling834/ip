@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Handles all user interaction for the Berry chatbot.
  */
 public class Ui {
-    public static final String DIVIDER = "‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧";
+    public static final String DIVIDER = "--------------------------------------------";
     public static final String CHATBOT_NAME = "Berry";
 
     private final Scanner in;
