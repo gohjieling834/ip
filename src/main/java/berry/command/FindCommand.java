@@ -21,7 +21,7 @@ public class FindCommand extends Command {
      * @param keyword The keyword to filter tasks by.
      */
     public FindCommand(String keyword) {
-        this.keyword = keyword;
+        this.keyword = keyword.trim();
     }
 
     /**
@@ -37,6 +37,9 @@ public class FindCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         TaskList tasksFound = new TaskList(findTasks(tasks));
+        if(keyword.isEmpty()){
+            throw new BerryException("Please enter the keyword. Thank you :)");
+        }
         if (tasksFound.isEmpty()) {
             throw new BerryException("No tasks found containing: " + keyword);
         }
