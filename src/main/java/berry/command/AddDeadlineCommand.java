@@ -35,20 +35,47 @@ public class AddDeadlineCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         String[] taskDetails = Parser.splitDetails(taskDetailsInput);
-        if (taskDetails.length < 2) {
-            throw new ArrayIndexOutOfBoundsException("Please enter both task description and by when. Thank you :)");
-        }
+        checkDetailsFormat(taskDetails);
+
         int startIndexOfBy = taskDetails[1].indexOf("by") + 2;  // + 2 because the substring start index should begin after by
         String description = taskDetails[0].trim();
         String by = taskDetails[1].substring(startIndexOfBy).trim();
+
+        checkDetails(description, by);
+        tasks.addTask(new Deadline(description, by));
+        storage.appendToFile(tasks.getList());
+        ui.printAddTaskMessage(tasks.getList());
+    }
+
+    /**
+     * Checks if the task details are entered in the correct format.
+     *
+     * @param details The task details.
+     * @throws ArrayIndexOutOfBoundsException If there is any missing details (e.g. description, by).
+     * @throws BerryException                 If the wrong format is used.
+     */
+    private void checkDetailsFormat(String[] details) {
+        if (details.length < 2) {
+            throw new ArrayIndexOutOfBoundsException("Please enter both task description and by when. Thank you :)");
+        }
+        if (!details[1].contains("by")) {
+            throw new BerryException("Wrong format. Please use the correct format!");
+        }
+    }
+
+    /**
+     * Checks if the task details are empty.
+     *
+     * @param description The task description.
+     * @param by          The task due date.
+     * @throws BerryException If any of the details are empty.
+     */
+    private void checkDetails(String description, String by) {
         if (description.isEmpty()) {
             throw new BerryException("Please enter the task description. Thank you :)");
         }
         if (by.isEmpty()) {
             throw new BerryException("Please enter the task due date. Thank you :)");
         }
-        tasks.addTask(new Deadline(description, by));
-        storage.appendToFile(tasks.getList());
-        ui.printAddTaskMessage(tasks.getList());
     }
 }
