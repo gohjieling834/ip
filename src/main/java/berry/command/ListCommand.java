@@ -22,7 +22,7 @@ public class ListCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.isEmpty()) {
-            throw new BerryException("There's no tasks in the list. Would you like to start adding tasks?");
+            throw new BerryException("There's no tasks in the list.\nWould you like to start adding tasks?");
         }
         ui.printList(tasks.getList(), "");
     }

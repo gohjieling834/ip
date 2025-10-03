@@ -44,7 +44,7 @@ public class DeleteCommand extends Command {
             ui.printDeleteTaskMessage(tasks.removeTask(taskNumber), tasks.getSize());
             storage.updateFile(taskNumber, COMMAND, tasks.getList());
         } catch (NumberFormatException e) {
-            ui.printErrorMessage("Sorry, I don't know which task to delete. Please enter the task number, thank you! :)");
+            ui.printErrorMessage("Sorry, I don't know which task to delete.\nPlease enter the task number, thank you! :)");
         } catch (IndexOutOfBoundsException e) {
             ui.printErrorMessage("This task number does not exist! :|");
         } catch (IOException e) {

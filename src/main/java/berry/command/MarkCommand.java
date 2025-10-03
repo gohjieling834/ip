@@ -53,7 +53,7 @@ public class MarkCommand extends Command {
             }
             storage.updateFile(taskNumber, COMMAND, tasks.getList());
         } catch (NumberFormatException e) {
-            ui.printErrorMessage("Sorry, I don't know which task to mark/unmark. Please enter the task number, thank you! :)");
+            ui.printErrorMessage("Sorry, I don't know which task to mark/unmark.\nPlease enter the task number, thank you! :)");
         } catch (IndexOutOfBoundsException e) {
             ui.printErrorMessage("This task number does not exist! :|");
         } catch (IOException e) {
