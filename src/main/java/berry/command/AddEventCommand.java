@@ -1,5 +1,6 @@
 package berry.command;
 
+import berry.data.BerryException;
 import berry.data.TaskList;
 import berry.parser.Parser;
 import berry.storage.Storage;
@@ -29,7 +30,8 @@ public class AddEventCommand extends Command {
      * @param tasks   List that holds all current tasks.
      * @param ui      Ui instance used to display messages to the user.
      * @param storage Storage instance used to update berry.txt.
-     * @throws IOException If task description or from or to is not specified by user.
+     * @throws IOException                    If an error occurs when appending to the file.
+     * @throws ArrayIndexOutOfBoundsException If task description or from or to is not specified by user.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         String[] taskDetails = Parser.splitDetails(taskDetailsInput);
@@ -41,6 +43,15 @@ public class AddEventCommand extends Command {
         String description = taskDetails[0].trim();
         String from = taskDetails[1].substring(startIndexOfFrom).trim();
         String to = taskDetails[2].substring(startIndexOfTo).trim();
+        if (description.isEmpty()) {
+            throw new BerryException("Please enter event description! Thank you :)");
+        }
+        if (from.isEmpty()) {
+            throw new BerryException("Please enter when the event starts! Thank you :)");
+        }
+        if (to.isEmpty()) {
+            throw new BerryException("Please enter when the event ends! Thank you :)");
+        }
         tasks.addTask(new Event(description, from, to));
         storage.appendToFile(tasks.getList());
         ui.printAddTaskMessage(tasks.getList());

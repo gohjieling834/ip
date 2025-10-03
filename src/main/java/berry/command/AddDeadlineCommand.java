@@ -1,5 +1,6 @@
 package berry.command;
 
+import berry.data.BerryException;
 import berry.data.TaskList;
 import berry.parser.Parser;
 import berry.storage.Storage;
@@ -29,7 +30,8 @@ public class AddDeadlineCommand extends Command {
      * @param tasks   List that holds all current tasks.
      * @param ui      Ui instance used to display messages to the user.
      * @param storage Storage instance used to update berry.txt.
-     * @throws IOException If either task description or by is not specified by user.
+     * @throws IOException                    If an error occurs when appending to the file.
+     * @throws ArrayIndexOutOfBoundsException If either task description or by is not specified by user.
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
         String[] taskDetails = Parser.splitDetails(taskDetailsInput);
@@ -39,6 +41,12 @@ public class AddDeadlineCommand extends Command {
         int startIndexOfBy = taskDetails[1].indexOf("by") + 2;  // + 2 because the substring start index should begin after by
         String description = taskDetails[0].trim();
         String by = taskDetails[1].substring(startIndexOfBy).trim();
+        if (description.isEmpty()) {
+            throw new BerryException("Please enter the task description. Thank you :)");
+        }
+        if (by.isEmpty()) {
+            throw new BerryException("Please enter the task due date. Thank you :)");
+        }
         tasks.addTask(new Deadline(description, by));
         storage.appendToFile(tasks.getList());
         ui.printAddTaskMessage(tasks.getList());
