@@ -26,30 +26,35 @@ public class Parser {
      *
      * @param userInput The full string entered by the user.
      * @return a Command object that represents the user's command.
+     * @throws ArrayIndexOutOfBoundsException If the user's command is invalid.
      */
     public static Command extractCommand(String userInput) {
         String[] words = userInput.split(" ", 2);   // split the input into command and details
-        switch (words[0].trim()) {
-        case "list":
-            return new ListCommand();
-        case "todo":
-            return new AddTodoCommand(words[1]);
-        case "deadline":
-            return new AddDeadlineCommand(words[1]);
-        case "event":
-            return new AddEventCommand(words[1]);
-        case "unmark":
-            return new MarkCommand(words[1], false);
-        case "mark":
-            return new MarkCommand(words[1], true);
-        case "delete":
-            return new DeleteCommand(words[1]);
-        case "find":
-            return new FindCommand(words[1]);
-        case "bye":
-            return new ExitCommand();
-        default:
-            throw new BerryException("Sorry, I'm not sure what you want me to do ._.");
+        try {
+            switch (words[0].trim()) {
+            case "list":
+                return new ListCommand();
+            case "todo":
+                return new AddTodoCommand(words[1]);
+            case "deadline":
+                return new AddDeadlineCommand(words[1]);
+            case "event":
+                return new AddEventCommand(words[1]);
+            case "unmark":
+                return new MarkCommand(words[1], false);
+            case "mark":
+                return new MarkCommand(words[1], true);
+            case "delete":
+                return new DeleteCommand(words[1]);
+            case "find":
+                return new FindCommand(words[1]);
+            case "bye":
+                return new ExitCommand();
+            default:
+                throw new BerryException("Sorry, I'm not sure what you want me to do ._.");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new ArrayIndexOutOfBoundsException("Invalid command! Please enter the details required.");
         }
     }
 
