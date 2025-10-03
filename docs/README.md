@@ -1,6 +1,6 @@
 # Berry User Guide
 
-<img width="462" height="479" alt="Image" src="https://github.com/user-attachments/assets/0973a6a3-20ca-4b85-98c4-e63ba906bdc0" />
+<img width="374" height="479" alt="Image" src="https://github.com/user-attachments/assets/2710709e-3098-4fc1-9bef-273a37fcda46" />
 
 Berry is a personal assistant chatbot that helps you manage and keep track of your tasks. It is optimized for use
 through a Command Line Interface (CLI), making it especially efficient for fast typists. Compared to traditional
@@ -33,11 +33,11 @@ Examples:
 Expected Outcome:
 
 ```
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 Got it. I've added this task:
   [T][ ] Read book
 Now you have 1 tasks in the list.
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 ```
 
 ### Adding deadlines
@@ -55,11 +55,11 @@ Examples:
 Expected Outcome:
 
 ```
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 Got it. I've added this task:
   [D][ ] Do CS2113 Quiz (by: 7 Oct 9pm)
 Now you have 2 tasks in the list.
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 ```
 
 ### Adding events
@@ -76,11 +76,11 @@ Examples:
 Expected Outcome:
 
 ```
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 Got it. I've added this task:
   [E][ ] Lecture (from: 4pm to: 6pm)
 Now you have 3 tasks in the list.
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 ```
 
 ### Listing all tasks
@@ -92,11 +92,11 @@ Format: `list`
 Expected Outcome:
 
 ```
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 1.[T][ ] Read book
 2.[D][ ] Do CS2113 Quiz (by: 7 Oct 9pm)
 3.[E][ ] Lecture (from: 4pm to: 6pm)
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 ```
 
 ### Deleting a task
@@ -112,11 +112,11 @@ Examples:
 Expected Outcome:
 
 ```
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 Okay, I've removed this task:
   [T][ ] Read book
 Now you have 2 tasks in the list.
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 ```
 
 ### Marking a task
@@ -133,10 +133,10 @@ Example:
 Expected Outcome:
 
 ```
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 Nice! I've marked this task as done:
   [T][X] Read book
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 ```
 
 ### Unmarking a task
@@ -153,10 +153,10 @@ Example:
 Expected Outcome:
 
 ```
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 Okay, I've marked this task as not done yet:
   [T][ ] Read book
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 ```
 
 ### Finding a task
@@ -172,10 +172,10 @@ Examples:
 Expected Outcome:
 
 ```
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 Here are the matching tasks in your list:
 1.[T][ ] Read book
-‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧‧⋆ ✧˚₊‧⋆. ✧˚₊‧⋆‧
+--------------------------------------------
 ```
 
 ### Exiting the program
